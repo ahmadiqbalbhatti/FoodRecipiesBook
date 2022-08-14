@@ -17,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button signUpButton = findViewById(R.id.signUpButton);
+        TextView forgotPassword = findViewById(R.id.forgotPassword);
 //        TextView createAnAccount = findViewById(R.id.createAnAccount);
 
 
@@ -29,6 +30,17 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUpIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(signUpIntent);
+
+            }
+        });
+
 
 //        createAnAccount.setOnClickListener(new View.OnClickListener() {
 //            @Override
