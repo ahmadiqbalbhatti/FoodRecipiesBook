@@ -1,6 +1,7 @@
 package com.example.foodrecipiesbook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +13,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Thread thread = new Thread() {
             public void run() {
                 try {
-                    sleep(1000);
+                    sleep(2000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {

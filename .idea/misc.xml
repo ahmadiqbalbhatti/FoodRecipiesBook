@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/btn_bg.xml" value="0.1745" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/btn_bg_hollow.xml" value="0.1745" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/login_bg_card.xml" value="0.176" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
       </map>
     </option>
