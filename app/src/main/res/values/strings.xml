@@ -9,5 +9,6 @@
     <string name="or">OR</string>
     <string name="create_an_account">Create an Account?</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="back_to_log_in">Back to Login</string>
 
 </resources>
