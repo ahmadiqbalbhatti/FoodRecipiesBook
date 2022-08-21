@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bnbMenuHome"
+        android:title="Home"
+        android:icon="@drawable/home"/>
+
+    <item android:id="@+id/bnbMenuSearch"
+        android:title="Search"
+        android:icon="@drawable/search"/>
+    <item android:id="@+id/addNewRecipe"
+        android:title=""/>
+
+
+    <item android:id="@+id/bnbMenuSetting"
+        android:title="Setting"
+        android:icon="@drawable/settings"/>
+
+    <item android:id="@+id/bnbMenuPerson"
+        android:title="Profile"
+        android:icon="@drawable/person"/>
+
+</menu>

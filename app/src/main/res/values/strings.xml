@@ -13,5 +13,6 @@
     <string name="fast_food_recipes">Fast food recipes</string>
     <string name="lorem_ipsm">Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</string>
     <string name="pakistani_recipes">Pakistani recipes</string>
+    <string name="recommended_recipes">Recommended recipes</string>
 
 </resources>
