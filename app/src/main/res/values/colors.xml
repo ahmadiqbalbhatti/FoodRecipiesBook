@@ -10,4 +10,10 @@
     <color name="maroon">#FF551708</color>
     <color name="brown">#FF9F3D10</color>
 
+    <color name="darkBrown">#551708</color>
+    <color name="darkBrown_700">#9F3D10</color>
+    <color name="darkBrown_500">#BF9F3D10</color>
+    <color name="white_500">#F5F5F5</color>
+
+
 </resources>
