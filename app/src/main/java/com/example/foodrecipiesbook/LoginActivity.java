@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (emailTextView == null && passwordTextView == null){
+                if (emailTextView.getText().toString().isEmpty() && passwordTextView.getText().toString().isEmpty()){
                     Toast.makeText(LoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
                 }else{
                     navigateTo(LoginActivity.this, HomeActivity.class);
