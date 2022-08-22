@@ -276,9 +276,24 @@
                 android:textStyle="bold" />
 
             <HorizontalScrollView
+
+                android:id="@+id/horizontalScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scrollbarThumbHorizontal="@color/darkBrown_700">
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/horizontalView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:scrollbars="horizontal"/>-->
+<!--                </LinearLayout>-->
 
 
                 <LinearLayout

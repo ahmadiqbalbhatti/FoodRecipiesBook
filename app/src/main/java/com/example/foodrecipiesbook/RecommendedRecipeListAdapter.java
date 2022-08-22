@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class RecommendedRecipeListAdapter extends BaseAdapter {
     private Context context;
@@ -13,12 +15,16 @@ public class RecommendedRecipeListAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
 
-
-
+    public RecommendedRecipeListAdapter(Context context, int[] listOfImages, String[] listOfTitle) {
+        this.context = context;
+        this.listOfImages = listOfImages;
+        this.listOfTitle = listOfTitle;
+        layoutInflater = LayoutInflater.from(context);
+    }
 
     @Override
     public int getCount() {
-        return 0;
+        return listOfImages.length;
     }
 
     @Override
@@ -33,6 +39,14 @@ public class RecommendedRecipeListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        convertView = layoutInflater.inflate(R.layout.food_card_layout_for_favorite, null);
+
+        TextView recipeTitle = convertView.findViewById(R.id.cardRecipeTitle);
+        ImageView cardImage = convertView.findViewById(R.id.cardBottomImage);
+
+        recipeTitle.setText(listOfTitle[position]);
+        cardImage.setImageResource(listOfImages[position]);
+
+        return convertView;
     }
 }

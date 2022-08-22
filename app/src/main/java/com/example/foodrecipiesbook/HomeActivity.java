@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
         pakistaniRecipes = findViewById(R.id.pakistaniRecipe);
         vegRecipes = findViewById(R.id.vegRecipes);
         chickenRecipes = findViewById(R.id.chickenRecipes);
+
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
