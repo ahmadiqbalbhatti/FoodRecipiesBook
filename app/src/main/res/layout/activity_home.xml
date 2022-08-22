@@ -7,12 +7,10 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +23,7 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F5F5F5"
+            android:background="@color/white_500"
             android:columnCount="2"
             android:orientation="vertical"
             tools:context=".HomeActivity">
@@ -297,6 +295,44 @@
                 </LinearLayout>
 
             </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:padding="8sp"
+                android:text="@string/yours_recipes"
+                android:textColor="@color/darkBrown_700"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:background="@color/white_500">
+                <TextView
+                    android:id="@+id/noRecipeAddedYet"
+                    android:layout_marginTop="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:gravity="center"
+                    android:padding="12sp"
+                    android:text="@string/you_havenot"
+                    android:textColor="@color/darkBrown_700"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </GridLayout>
 
         </LinearLayout>
 
