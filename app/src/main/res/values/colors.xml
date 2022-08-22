@@ -14,6 +14,7 @@
     <color name="darkBrown_700">#9F3D10</color>
     <color name="darkBrown_500">#BF9F3D10</color>
     <color name="white_500">#F5F5F5</color>
+    <color name="white_200">#80F5F5F5</color>
 
 
 </resources>

@@ -91,6 +91,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/pakistaniRecipe"
                 android:layout_width="190sp"
                 android:layout_height="250dp"
                 android:layout_row="1"
@@ -148,6 +149,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/vegRecipes"
                 android:layout_width="205sp"
                 android:layout_height="125dp"
                 android:layout_row="1"
@@ -202,6 +204,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/chickenRecipes"
                 android:layout_width="205sp"
                 android:layout_height="125dp"
                 android:layout_row="2"

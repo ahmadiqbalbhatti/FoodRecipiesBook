@@ -43,11 +43,13 @@ public class LoginActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (emailTextView.getText().toString().isEmpty() && passwordTextView.getText().toString().isEmpty()){
-                    Toast.makeText(LoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
-                }else{
-                    navigateTo(LoginActivity.this, HomeActivity.class);
-                }
+//                if (emailTextView.getText().toString().isEmpty() && passwordTextView.getText().toString().isEmpty()){
+//                    Toast.makeText(LoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
+//                }else{
+//                    navigateTo(LoginActivity.this, HomeActivity.class);
+//                }
+                navigateTo(LoginActivity.this, HomeActivity.class);
+
             }
         });
 
@@ -58,8 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                intent = new Intent(LoginActivity.this, SignUpActivity.class);
-//                startActivity(intent);
                 navigateTo(LoginActivity.this, SignUpActivity.class);
             }
         });
@@ -68,9 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-//                startActivity(intent);
-                navigateTo(LoginActivity.this, SignUpActivity.class);
+                navigateTo(LoginActivity.this, ForgotPasswordActivity.class);
             }
         });
 

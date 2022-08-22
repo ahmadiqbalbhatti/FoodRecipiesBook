@@ -1,21 +1,20 @@
 package com.example.foodrecipiesbook;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
-    int[] images ={
+    int[] images = {
             R.drawable.burgers,
             R.drawable.fajita,
             R.drawable.biryani,
@@ -24,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
             R.drawable.biryani,
     };
 
-    String[] title={
+    String[] title = {
             "Chicken burger with extra cheese",
             "Fajita Burger with extra cheese",
             "White rice chicken biryani",
@@ -53,8 +52,11 @@ public class HomeActivity extends AppCompatActivity {
     };
 
 
-
     private CardView fastFoodRecipesCardView;
+    private CardView pakistaniRecipes;
+    private CardView vegRecipes;
+    private CardView chickenRecipes;
+
 
     private androidx.appcompat.widget.Toolbar myToolbar;
 
@@ -72,21 +74,46 @@ public class HomeActivity extends AppCompatActivity {
 
         myToolbar = findViewById(R.id.myToolBar);
 
-
         setSupportActionBar(myToolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Food Recipe Book");
 
         fastFoodRecipesCardView = findViewById(R.id.fastFoodRecipes);
-        
-        fastFoodRecipesCardView.setOnClickListener(new View.OnClickListener() {
+        pakistaniRecipes = findViewById(R.id.pakistaniRecipe);
+        vegRecipes = findViewById(R.id.vegRecipes);
+        chickenRecipes = findViewById(R.id.chickenRecipes);
+
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "I'm clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, RecipesListActivity.class);
-                startActivity(intent);
+                cardToListNavigation(HomeActivity.this, RecipesListActivity.class);
+            }
+        };
+
+        fastFoodRecipesCardView.setOnClickListener(onClickListener);
+        pakistaniRecipes.setOnClickListener(onClickListener);
+        vegRecipes.setOnClickListener(onClickListener);
+        chickenRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardToListNavigation(HomeActivity.this, RecipeDetailActivity.class);
             }
         });
 
-        
+
+//        fastFoodRecipesCardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(HomeActivity.this, "I'm clicked", Toast.LENGTH_SHORT).show();
+////                Intent intent = new Intent(HomeActivity.this, RecipesListActivity.class);
+////                startActivity(intent);
+//
+//                cardToListNavigation(HomeActivity.this);
+//            }
+//        });
+    }
+
+    private void cardToListNavigation(Context context, Class activity) {
+        Intent intent = new Intent(context, activity);
+        startActivity(intent);
     }
 }

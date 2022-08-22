@@ -2,9 +2,19 @@ package com.example.foodrecipiesbook;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 public class RecipesListActivity extends AppCompatActivity {
 
@@ -56,11 +66,31 @@ public class RecipesListActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.myToolBar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Fast Food Recipes List");
+//        getSupportActionBar().setTitle("Fast Food Recipes List");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = findViewById(R.id.recipeListView);
         listView.setAdapter(new RecipeListAdapter(getApplicationContext(), images, title, ingredients, time));
+
+
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
+                Toast.makeText(RecipesListActivity.this, time[position], Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RecipesListActivity.this, RecipeDetailActivity.class);
+                intent.putExtra("title", title[position]);
+                intent.putExtra("ingredients", ingredients[position]);
+                intent.putExtra("imageId", images[position]);
+                intent.putExtra("time", time[position]);
+
+                startActivityForResult(intent, 1);
+            }
+        });
 
 
     }
