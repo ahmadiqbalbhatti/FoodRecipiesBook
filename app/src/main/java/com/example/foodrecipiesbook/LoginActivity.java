@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends AppCompatActivity {
 
     Button logInButton;
@@ -21,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView passwordTextView;
 
     Intent intent;
+
+    private FirebaseAuth mAuth;
 
     private void navigateTo(Context context, Class navigateToClass){
         intent = new Intent(context, navigateToClass);
