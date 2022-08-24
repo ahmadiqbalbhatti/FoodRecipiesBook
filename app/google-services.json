@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "18986671172",
+    "project_id": "food-recipe-book-app",
+    "storage_bucket": "food-recipe-book-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18986671172:android:b58e2242016dbba63f3011",
+        "android_client_info": {
+          "package_name": "com.example.foodrecipiesbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18986671172-qjla5rl2ml9e06sokfnq4ssaano4r7u1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy3XrCNO-uNU0CsRo5lUTmt2LeWin8J6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18986671172-qjla5rl2ml9e06sokfnq4ssaano4r7u1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
