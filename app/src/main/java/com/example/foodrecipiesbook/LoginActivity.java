@@ -1,16 +1,17 @@
 package com.example.foodrecipiesbook;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodrecipiesbook.firebase.FirebaseClass;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -19,12 +20,13 @@ public class LoginActivity extends AppCompatActivity {
     Button signUpButton;
     TextView forgotPassword;
 
-    TextView emailTextView;
-    TextView passwordTextView;
+    EditText emailEditText;
+    EditText passwordEditText;
 
     Intent intent;
 
-    private FirebaseAuth mAuth;
+    FirebaseClass firebaseClass = new FirebaseClass(LoginActivity.this, HomeActivity.class);
+
 
     private void navigateTo(Context context, Class navigateToClass){
         intent = new Intent(context, navigateToClass);
@@ -40,26 +42,28 @@ public class LoginActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.signUpButton);
         forgotPassword = findViewById(R.id.forgotPassword);
 
-        emailTextView = findViewById(R.id.emailTextView);
-        passwordTextView = findViewById(R.id.passwordTextView);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+
 
 
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (emailTextView.getText().toString().isEmpty() && passwordTextView.getText().toString().isEmpty()){
-//                    Toast.makeText(LoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    navigateTo(LoginActivity.this, HomeActivity.class);
-//                }
-                navigateTo(LoginActivity.this, HomeActivity.class);
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                if (email.isEmpty() && password.isEmpty()){
+                    Toast.makeText(LoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (firebaseClass.loginUser(email, password)){
+                        navigateTo(LoginActivity.this, HomeActivity.class);
+                        finish();
+                    }
+                }
+//                navigateTo(LoginActivity.this, HomeActivity.class);
 
             }
         });
-
-
-
-
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                 navigateTo(LoginActivity.this, SignUpActivity.class);
             }
         });
-
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override

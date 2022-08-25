@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/custom_toolbar" />
+            layout="@layout/custom_toolbar"/>
 
         <GridLayout
             android:layout_width="match_parent"

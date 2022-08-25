@@ -3,10 +3,17 @@ package com.example.foodrecipiesbook;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.print.PrintAttributes;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -78,6 +85,22 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Food Recipe Book");
 
+
+        // Creating button for toolbar only
+
+        ImageView toolbarButton = new ImageView(this);
+
+        Toolbar.LayoutParams toolBarLayoutParam = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        toolBarLayoutParam.gravity = Gravity.END;
+        toolBarLayoutParam.setMarginStart(300);
+        toolbarButton.setEnabled(true);
+
+
+        toolbarButton.setLayoutParams(toolBarLayoutParam);
+        toolbarButton.setImageResource(R.drawable.login);
+        myToolbar.addView(toolbarButton);
+
+
         fastFoodRecipesCardView = findViewById(R.id.fastFoodRecipes);
         pakistaniRecipes = findViewById(R.id.pakistaniRecipe);
         vegRecipes = findViewById(R.id.vegRecipes);
@@ -94,10 +117,12 @@ public class HomeActivity extends AppCompatActivity {
         fastFoodRecipesCardView.setOnClickListener(onClickListener);
         pakistaniRecipes.setOnClickListener(onClickListener);
         vegRecipes.setOnClickListener(onClickListener);
-        chickenRecipes.setOnClickListener(new View.OnClickListener() {
+        chickenRecipes.setOnClickListener(onClickListener);
+        toolbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardToListNavigation(HomeActivity.this, RecipeDetailActivity.class);
+                cardToListNavigation(HomeActivity.this, LoginActivity.class);
+                finish();
             }
         });
 
