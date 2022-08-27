@@ -2,6 +2,7 @@ package com.example.foodrecipiesbook;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import android.content.Intent;
@@ -57,6 +58,8 @@ public class RecipesListActivity extends AppCompatActivity {
 
 
     private ListView listView;
+
+    private RecyclerView recyclerView;
 
 
     @Override

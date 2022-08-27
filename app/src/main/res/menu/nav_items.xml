@@ -7,16 +7,15 @@
     <item android:id="@+id/bnbMenuSearch"
         android:title="Search"
         android:icon="@drawable/search"/>
+
     <item android:id="@+id/addNewRecipe"
-        android:title=""/>
+        android:title="Favorite"
+        android:icon="@drawable/favorite_fill"/>
 
-
+<!--    <item android:id="@+id/bnbMenuPerson"-->
+<!--        android:title="Profile"-->
+<!--        android:icon="@drawable/person"/>-->
     <item android:id="@+id/bnbMenuSetting"
         android:title="Setting"
-        android:icon="@drawable/filter"/>
-
-    <item android:id="@+id/bnbMenuPerson"
-        android:title="Profile"
-        android:icon="@drawable/person"/>
-
+        android:icon="@drawable/settings"/>
 </menu>

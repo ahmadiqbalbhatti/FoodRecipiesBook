@@ -18,5 +18,15 @@
     <string name="yours_recipes">Yours recipes</string>
     <string name="you_havenot">You haven\'t added any recipe yet!</string>
     <string name="_120_mint">120 MINT</string>
+    <string name="add_your_recipe">Add New Recipe</string>
+    <string name="recipe_title">Title</string>
+    <string name="recipe_duration">Duration</string>
+    <string name="recipe_ingredients">Ingredients</string>
+    <string name="recipe_method">Method</string>
+    <string name="save">Save</string>
+    <string name="cancel">cancel</string>
+    <string name="nav_open">open</string>
+    <string name="nav_close">close</string>
+
 
 </resources>
