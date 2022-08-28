@@ -101,6 +101,7 @@
                 android:textColorHint="@color/brown" />
 
             <EditText
+                android:id="@+id/newEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16sp"
@@ -112,6 +113,7 @@
                 android:textColorHint="@color/brown" />
 
             <EditText
+                android:id="@+id/newPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16sp"

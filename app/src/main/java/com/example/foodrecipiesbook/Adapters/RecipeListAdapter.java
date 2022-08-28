@@ -1,4 +1,4 @@
-package com.example.foodrecipiesbook;
+package com.example.foodrecipiesbook.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.foodrecipiesbook.R;
+
 public class RecipeListAdapter extends BaseAdapter {
 
     private Context context;
@@ -15,6 +17,7 @@ public class RecipeListAdapter extends BaseAdapter {
     private String[] listOfTitle;
     private String[] listOfIngredients;
     private String[] listOfTime;
+
 
     private LayoutInflater layoutInflater;
 

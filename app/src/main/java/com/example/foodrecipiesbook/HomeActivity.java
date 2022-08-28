@@ -1,14 +1,13 @@
 package com.example.foodrecipiesbook;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,12 +16,54 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.foodrecipiesbook.Adapters.RecipeListAdapter;
+import com.example.foodrecipiesbook.CustomClasses.General;
+import com.example.foodrecipiesbook.FireBase.DataModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
+
+    int[] images ={
+            R.drawable.burgers,
+            R.drawable.fajita,
+            R.drawable.biryani,
+            R.drawable.burgers,
+            R.drawable.fajita,
+            R.drawable.biryani,
+    };
+
+    String[] title={
+            "Chicken burger with extra cheese",
+            "Fajita Burger with extra cheese",
+            "White rice chicken biryani",
+            "Chicken burger with extra cheese",
+            "Fajita Burger with extra cheese",
+            "White rice chicken biryani",
+    };
+
+    String[] ingredients = {
+            "Ingredients: Item1, Item2, Item3, ...",
+            "Ingredients: Item1, Item2, Item3, ...",
+            "Ingredients: Item1, Item2, Item3, ...",
+            "Ingredients: Item1, Item2, Item3, ...",
+            "Ingredients: Item1, Item2, Item3, ...",
+            "Ingredients: Item1, Item2, Item3, ...",
+    };
+
+    String[] time = {
+            "20 MINT",
+            "30 MINT",
+            "120 MINT",
+            "20 MINT",
+            "30 MINT",
+            "120 MINT",
+
+    };
+
 
 
     private NavigationView nav;
@@ -39,6 +80,9 @@ public class HomeActivity extends AppCompatActivity {
     private Button cancelButton;
     private FloatingActionButton addNewRecipeFAButton;
 
+    LinkedList<DataModel> dataModelLinkedList;
+
+
     public HomeActivity() {
     }
 
@@ -47,7 +91,20 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
         dialog = new Dialog(this);
+        General generalFunctions = new General(this);
+        dataModelLinkedList = new LinkedList<>();
+        DataModel dataModel = new DataModel(R.drawable.biryani, "My Biryani",
+                "120 MINT", "Item1, Item2, Item3, Item4, Item5");
+        dataModelLinkedList.add(dataModel);
+
+
+//
+//        System.out.println("I'm groot I'm groot I'm groot I'm groot I'm groot" +
+//                " I'm groot I'm groot I'm groot I'm groot I'm grootI'm groot " +
+//                "I'm groot I'm groot    "+ dataModelLinkedList.get(0).title);
+
 
         androidx.appcompat.widget.Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -62,7 +119,6 @@ public class HomeActivity extends AppCompatActivity {
 //
 //        toggle.syncState();
 
-
         CardView fastFoodRecipesCardView = findViewById(R.id.fastFoodRecipes);
         CardView pakistaniRecipes = findViewById(R.id.pakistaniRecipe);
         CardView vegRecipes = findViewById(R.id.vegRecipes);
@@ -70,17 +126,17 @@ public class HomeActivity extends AppCompatActivity {
 
         init();
 
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cardToListNavigation(HomeActivity.this, RecipesListActivity.class);
-            }
-        };
+        fastFoodRecipesCardView.setOnClickListener(generalFunctions.
+                simpleClickListener(RecipesListActivity.class));
 
-        fastFoodRecipesCardView.setOnClickListener(onClickListener);
-        pakistaniRecipes.setOnClickListener(onClickListener);
-        vegRecipes.setOnClickListener(onClickListener);
-        chickenRecipes.setOnClickListener(onClickListener);
+        pakistaniRecipes.setOnClickListener(generalFunctions.
+                simpleClickListener(RecipesListActivity.class));
+
+        vegRecipes.setOnClickListener(generalFunctions.
+                simpleClickListener(RecipesListActivity.class));
+
+        chickenRecipes.setOnClickListener(generalFunctions.
+                simpleClickListener(RecipesListActivity.class));
 
 
         addNewRecipeFAButton.setOnClickListener(new View.OnClickListener() {
@@ -91,12 +147,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
-
-    private void cardToListNavigation(Context context, Class activity) {
-        Intent intent = new Intent(context, activity);
-        startActivity(intent);
-    }
-
 
     private void openDialog() {
         dialog.setContentView(R.layout.add_new_recipe_layout_design);
@@ -113,19 +163,26 @@ public class HomeActivity extends AppCompatActivity {
                 ingredientsEditText = dialog.findViewById(R.id.newRecipeIngredients);
                 methodEditText = dialog.findViewById(R.id.recipeMethod);
 
-                String title = titleEditText.getText().toString();
+//                String title = titleEditText.getText().toString();
+                ListView newListView = findViewById(R.id.newRecipeListView);
 
-                Toast.makeText(HomeActivity.this, title, Toast.LENGTH_SHORT).show();
+//                System.out.println(" Im groot Im groot Im groot Im groot Im " +
+//                        "groot Im groot Im groot Im groot Im groot Im groot" + dataModelLinkedList.get(0).title);
+//                HomeListAdapter homeListAdapter =
+//                        new HomeListAdapter(HomeActivity.this, dataModelLinkedList);
+
+                RecipeListAdapter recipeListAdapter =
+                        new RecipeListAdapter(HomeActivity.this, images,
+                                title, ingredients, time);
+
+                newListView.setAdapter(recipeListAdapter);
+
+                Toast.makeText(HomeActivity.this, "I got pressed",
+                        Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        cancelButton.setOnClickListener(v -> closeDialog());
         dialog.show();
     }
 
@@ -142,6 +199,5 @@ public class HomeActivity extends AppCompatActivity {
         saveRecipeButton = findViewById(R.id.saveRecipe);
         cancelButton = findViewById(R.id.cancelRecipe);
     }
-
 
 }

@@ -30,6 +30,25 @@ public class FirebaseClass {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    public void signUpUser(String email, String password){
+        mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(context, "Your Account Successfully Created",
+                        Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context, activity));
+                flag = true;
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+                flag = false;
+            }
+        });
+    }
     public Boolean loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
@@ -42,7 +61,7 @@ public class FirebaseClass {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                 flag = false;
             }
         });
