@@ -67,16 +67,13 @@ public class RecipesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes_list);
 
-        Toolbar toolbar = findViewById(R.id.myToolBar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setTitle("Fast Food Recipes List");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = findViewById(R.id.recipeListView);
         listView.setAdapter(new RecipeListAdapter(getApplicationContext(), images, title, ingredients, time));
-
-
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

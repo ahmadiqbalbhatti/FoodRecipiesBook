@@ -1,4 +1,4 @@
-package com.example.foodrecipiesbook.firebase;
+package com.example.foodrecipiesbook.FireBase;
 
 public class DataModel {
     public int[] images;

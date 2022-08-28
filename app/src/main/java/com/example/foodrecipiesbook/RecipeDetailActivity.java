@@ -24,7 +24,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
 
-        Toolbar toolbar = findViewById(R.id.myToolBar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Start Cooking");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

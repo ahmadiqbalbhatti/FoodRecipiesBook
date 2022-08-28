@@ -6,65 +6,30 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.foodrecipiesbook.firebase.DataModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
 
-    int[] images = {
-            R.drawable.burgers,
-            R.drawable.fajita,
-            R.drawable.biryani,
-            R.drawable.burgers,
-            R.drawable.fajita,
-            R.drawable.biryani,
-    };
+    private NavigationView nav;
+    private ActionBarDrawerToggle toggle;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
 
-    String[] title = {
-            "Chicken burger with extra cheese",
-            "Fajita Burger with extra cheese",
-            "White rice chicken biryani",
-            "Chicken burger with extra cheese",
-            "Fajita Burger with extra cheese",
-            "White rice chicken biryani",
-    };
-
-    String[] ingredients = {
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-    };
-
-    String[] time = {
-            "20 MINT",
-            "30 MINT",
-            "120 MINT",
-            "20 MINT",
-            "30 MINT",
-            "120 MINT",
-
-    };
     private Dialog dialog;
     private EditText titleEditText;
     private EditText durationEditText;
@@ -72,6 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     private EditText methodEditText;
     private Button saveRecipeButton;
     private Button cancelButton;
+    private FloatingActionButton addNewRecipeFAButton;
+
     public HomeActivity() {
     }
 
@@ -81,38 +48,19 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         dialog = new Dialog(this);
-        DataModel dataModel =  new DataModel();
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
-        LinearLayout linearLayout = findViewById(R.id.recommendedRecipesLayout);
-
-        LayoutInflater layoutInflater = LayoutInflater.from(HomeActivity.this);
-
-        androidx.appcompat.widget.Toolbar myToolbar = findViewById(R.id.myToolBar);
-
+        androidx.appcompat.widget.Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Food Recipe Book");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Hi, Ahmad!");
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(HomeActivity.this, drawerLayout, R.string.nav_open, R.string.nav_close);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
-        // Creating button for toolbar only
-        ImageView toolbarButton = new ImageView(this);
-
-        Toolbar.LayoutParams toolBarLayoutParam = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-        toolBarLayoutParam.gravity = Gravity.END;
-        toolBarLayoutParam.setMarginStart(300);
-        toolbarButton.setEnabled(true);
-
-
-        toolbarButton.setLayoutParams(toolBarLayoutParam);
-        toolbarButton.setImageResource(R.drawable.login);
-        myToolbar.addView(toolbarButton);
+////        nav = (NavigationView) findViewById(R.id.navigationView);
+//        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+//        toggle = new ActionBarDrawerToggle(HomeActivity.this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+//        drawerLayout.addDrawerListener(toggle);
+////        nav.bringToFront();
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        toggle.syncState();
 
 
         CardView fastFoodRecipesCardView = findViewById(R.id.fastFoodRecipes);
@@ -120,13 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         CardView vegRecipes = findViewById(R.id.vegRecipes);
         CardView chickenRecipes = findViewById(R.id.chickenRecipes);
 
-        FloatingActionButton addNewRecipeFAButton = findViewById(R.id.addNewRecipeFAButton);
-        durationEditText = findViewById(R.id.recipeDuration);
-        titleEditText = findViewById(R.id.newRecipeTitle);
-        ingredientsEditText = findViewById(R.id.newRecipeIngredients);
-        methodEditText = findViewById(R.id.recipeMethod);
-        saveRecipeButton = findViewById(R.id.saveRecipe);
-        cancelButton = findViewById(R.id.cancelRecipe);
+        init();
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -135,15 +77,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
-
-
         fastFoodRecipesCardView.setOnClickListener(onClickListener);
         pakistaniRecipes.setOnClickListener(onClickListener);
         vegRecipes.setOnClickListener(onClickListener);
         chickenRecipes.setOnClickListener(onClickListener);
-        toolbarButton.setOnClickListener(v -> {
-            finish();
-        });
+
 
         addNewRecipeFAButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,6 +96,7 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(context, activity);
         startActivity(intent);
     }
+
 
     private void openDialog() {
         dialog.setContentView(R.layout.add_new_recipe_layout_design);
@@ -174,6 +113,9 @@ public class HomeActivity extends AppCompatActivity {
                 ingredientsEditText = dialog.findViewById(R.id.newRecipeIngredients);
                 methodEditText = dialog.findViewById(R.id.recipeMethod);
 
+                String title = titleEditText.getText().toString();
+
+                Toast.makeText(HomeActivity.this, title, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -181,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                closeDialog();
+                dialog.dismiss();
             }
         });
         dialog.show();
@@ -190,4 +132,16 @@ public class HomeActivity extends AppCompatActivity {
     private void closeDialog() {
         dialog.dismiss();
     }
+
+    private void init() {
+        addNewRecipeFAButton = findViewById(R.id.addNewRecipeFAButton);
+        durationEditText = findViewById(R.id.recipeDuration);
+        titleEditText = findViewById(R.id.newRecipeTitle);
+        ingredientsEditText = findViewById(R.id.newRecipeIngredients);
+        methodEditText = findViewById(R.id.recipeMethod);
+        saveRecipeButton = findViewById(R.id.saveRecipe);
+        cancelButton = findViewById(R.id.cancelRecipe);
+    }
+
+
 }

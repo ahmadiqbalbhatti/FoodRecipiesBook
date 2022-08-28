@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.foodrecipiesbook.firebase.FirebaseClass;
+import com.example.foodrecipiesbook.FireBase.FirebaseClass;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 

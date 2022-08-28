@@ -11,8 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.foodrecipiesbook.firebase.FirebaseClass;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.foodrecipiesbook.FireBase.FirebaseClass;
 
 public class LoginActivity extends AppCompatActivity {
 

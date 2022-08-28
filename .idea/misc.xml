@@ -8,9 +8,14 @@
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/btn_bg.xml" value="0.1745" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/btn_bg_hollow.xml" value="0.1745" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/curser.xml" value="0.231" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/favorite.xml" value="0.192" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/filter.xml" value="0.192" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/home.xml" value="0.1635" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/login_bg_card.xml" value="0.176" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/person.xml" value="0.192" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/right_two_corner_radius.xml" value="0.157" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/search.xml" value="0.192" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/settings.xml" value="0.192" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/time.xml" value="0.171" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/two_radius_corner_rectangle.xml" value="0.157" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/txt_background.xml" value="0.136" />
@@ -24,9 +29,11 @@
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/add_new_recipe_layout_design.xml" value="0.22521367521367522" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/custom_toolbar.xml" value="0.22435897435897437" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/food_card_layout_for_favorite.xml" value="0.22521367521367522" />
-        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/header_layout.xml" value="0.22435897435897437" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/header_layout.xml" value="0.23114035087719298" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/recipe_card_design.xml" value="0.22521367521367522" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/upper_gridview.xml" value="0.22435897435897437" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/menu/bottom_menu_navigation_bar.xml" value="0.22521367521367522" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/menu/nav_items.xml" value="0.22521367521367522" />
       </map>
     </option>
   </component>

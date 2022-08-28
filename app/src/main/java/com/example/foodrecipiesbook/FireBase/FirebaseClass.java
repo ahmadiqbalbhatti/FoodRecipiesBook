@@ -1,4 +1,4 @@
-package com.example.foodrecipiesbook.firebase;
+package com.example.foodrecipiesbook.FireBase;
 
 
 import android.content.Context;

@@ -15,6 +15,7 @@
 <!--    <item android:id="@+id/bnbMenuPerson"-->
 <!--        android:title="Profile"-->
 <!--        android:icon="@drawable/person"/>-->
+<!--    -->
     <item android:id="@+id/bnbMenuSetting"
         android:title="Setting"
         android:icon="@drawable/settings"/>
