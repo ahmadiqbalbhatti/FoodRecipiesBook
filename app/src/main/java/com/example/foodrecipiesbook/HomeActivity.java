@@ -3,74 +3,39 @@ package com.example.foodrecipiesbook;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.foodrecipiesbook.Adapters.RecipeListAdapter;
+import com.example.foodrecipiesbook.Adapters.AdapterForRecommendedRecipes;
+import com.example.foodrecipiesbook.Adapters.CustomRecyclerViewAdapter;
 import com.example.foodrecipiesbook.CustomClasses.General;
 import com.example.foodrecipiesbook.FireBase.DataModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.LinkedList;
-import java.util.Objects;
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
-    int[] images ={
-            R.drawable.burgers,
-            R.drawable.fajita,
-            R.drawable.biryani,
-            R.drawable.burgers,
-            R.drawable.fajita,
-            R.drawable.biryani,
-    };
-
-    String[] title={
-            "Chicken burger with extra cheese",
-            "Fajita Burger with extra cheese",
-            "White rice chicken biryani",
-            "Chicken burger with extra cheese",
-            "Fajita Burger with extra cheese",
-            "White rice chicken biryani",
-    };
-
-    String[] ingredients = {
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-            "Ingredients: Item1, Item2, Item3, ...",
-    };
-
-    String[] time = {
-            "20 MINT",
-            "30 MINT",
-            "120 MINT",
-            "20 MINT",
-            "30 MINT",
-            "120 MINT",
-
-    };
-
-
+    ArrayList<DataModel> dataModelArrayList;
 
     private NavigationView nav;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-
     private Dialog dialog;
     private EditText titleEditText;
     private EditText durationEditText;
@@ -79,53 +44,47 @@ public class HomeActivity extends AppCompatActivity {
     private Button saveRecipeButton;
     private Button cancelButton;
     private FloatingActionButton addNewRecipeFAButton;
-
-    LinkedList<DataModel> dataModelLinkedList;
-
+    private RecyclerView recyclerView;
+    private CardView fastFoodRecipesCardView;
+    private CardView pakistaniRecipes;
+    private CardView vegRecipes;
+    private CardView chickenRecipes;
 
     public HomeActivity() {
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        init();
 
         dialog = new Dialog(this);
         General generalFunctions = new General(this);
-        dataModelLinkedList = new LinkedList<>();
-        DataModel dataModel = new DataModel(R.drawable.biryani, "My Biryani",
-                "120 MINT", "Item1, Item2, Item3, Item4, Item5");
-        dataModelLinkedList.add(dataModel);
 
-
+        dataModelArrayList = new ArrayList<>();
+//        DataModel dataModel = new DataModel();
+//        dataModel.image = R.drawable.biryani;
+//        dataModel.title = "Chicken burger with extra cheese";
+//        dataModel.ingredients = "Item1, Item2, Item3, Item4, Item5";
+//        dataModel.duration = "50 MINT";
 //
-//        System.out.println("I'm groot I'm groot I'm groot I'm groot I'm groot" +
-//                " I'm groot I'm groot I'm groot I'm groot I'm grootI'm groot " +
-//                "I'm groot I'm groot    "+ dataModelLinkedList.get(0).title);
-
+//        dataModelArrayList.add(dataModel);
 
         androidx.appcompat.widget.Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Hi, Ahmad!");
+//        Objects.requireNonNull(getSupportActionBar()).setTitle("Hi, Ahmad!");
 
-////        nav = (NavigationView) findViewById(R.id.navigationView);
+//        nav = (NavigationView) findViewById(R.id.navigationView);
 //        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 //        toggle = new ActionBarDrawerToggle(HomeActivity.this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
 //        drawerLayout.addDrawerListener(toggle);
-////        nav.bringToFront();
+//        nav.bringToFront();
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//
+
 //        toggle.syncState();
-
-        CardView fastFoodRecipesCardView = findViewById(R.id.fastFoodRecipes);
-        CardView pakistaniRecipes = findViewById(R.id.pakistaniRecipe);
-        CardView vegRecipes = findViewById(R.id.vegRecipes);
-        CardView chickenRecipes = findViewById(R.id.chickenRecipes);
-
-        init();
-
         fastFoodRecipesCardView.setOnClickListener(generalFunctions.
                 simpleClickListener(RecipesListActivity.class));
 
@@ -138,6 +97,8 @@ public class HomeActivity extends AppCompatActivity {
         chickenRecipes.setOnClickListener(generalFunctions.
                 simpleClickListener(RecipesListActivity.class));
 
+        addUserRecipesInRecyclerView();
+//        addRecommendedRecipesInView();
 
         addNewRecipeFAButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,46 +109,75 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    private void addUserRecipesInRecyclerView() {
+        CustomRecyclerViewAdapter customRecyclerViewAdapter =
+                new CustomRecyclerViewAdapter(HomeActivity.this,
+                        dataModelArrayList, R.layout.recipe_card_design);
+
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(HomeActivity.this,
+                        LinearLayoutManager.VERTICAL, false);
+        recyclerView = findViewById(R.id.newRecipeListView);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(customRecyclerViewAdapter);
+
+        TextView textView = findViewById(R.id.noRecipeAddedYet);
+        if (customRecyclerViewAdapter.getItemCount() != 0) {
+            textView.setVisibility(textView.GONE);
+        }
+
+
+    }
+
+    private void addRecommendedRecipesInView() {
+        AdapterForRecommendedRecipes adapterForRecommendedRecipes = new AdapterForRecommendedRecipes(HomeActivity.this,
+                dataModelArrayList,
+                R.layout.food_card_layout_for_recommended_recipes);
+
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(HomeActivity.this,
+                        LinearLayoutManager.HORIZONTAL, false);
+//        recyclerView = findViewById(R.id.recommendedRecipeListView);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapterForRecommendedRecipes);
+    }
+
+
     private void openDialog() {
         dialog.setContentView(R.layout.add_new_recipe_layout_design);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
         saveRecipeButton = dialog.findViewById(R.id.saveRecipe);
         cancelButton = dialog.findViewById(R.id.cancelRecipe);
-        saveRecipeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Save", Toast.LENGTH_SHORT).show();
-                titleEditText = dialog.findViewById(R.id.newRecipeTitle);
-                durationEditText = dialog.findViewById(R.id.recipeDuration);
-                ingredientsEditText = dialog.findViewById(R.id.newRecipeIngredients);
-                methodEditText = dialog.findViewById(R.id.recipeMethod);
 
-//                String title = titleEditText.getText().toString();
-                ListView newListView = findViewById(R.id.newRecipeListView);
-
-//                System.out.println(" Im groot Im groot Im groot Im groot Im " +
-//                        "groot Im groot Im groot Im groot Im groot Im groot" + dataModelLinkedList.get(0).title);
-//                HomeListAdapter homeListAdapter =
-//                        new HomeListAdapter(HomeActivity.this, dataModelLinkedList);
-
-                RecipeListAdapter recipeListAdapter =
-                        new RecipeListAdapter(HomeActivity.this, images,
-                                title, ingredients, time);
-
-                newListView.setAdapter(recipeListAdapter);
-
-                Toast.makeText(HomeActivity.this, "I got pressed",
-                        Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
+        saveRecipeButton.setOnClickListener(closeDialogOnSave());
         cancelButton.setOnClickListener(v -> closeDialog());
         dialog.show();
     }
 
     private void closeDialog() {
         dialog.dismiss();
+    }
+
+    private View.OnClickListener closeDialogOnSave() {
+        return v -> {
+            titleEditText = dialog.findViewById(R.id.newRecipeTitle);
+            durationEditText = dialog.findViewById(R.id.recipeDuration);
+            ingredientsEditText = dialog.findViewById(R.id.newRecipeIngredients);
+            methodEditText = dialog.findViewById(R.id.recipeMethod);
+
+            DataModel dataModel = new DataModel();
+            dataModel.image = R.drawable.your_recipe_default_pic;
+            dataModel.title = titleEditText.getText().toString();
+            dataModel.duration = durationEditText.getText().toString();
+            dataModel.method = methodEditText.getText().toString();
+            dataModel.ingredients =
+                    ingredientsEditText.getText().toString();
+
+            dataModelArrayList.add(dataModel);
+            addUserRecipesInRecyclerView();
+            dialog.dismiss();
+        };
     }
 
     private void init() {
@@ -198,6 +188,11 @@ public class HomeActivity extends AppCompatActivity {
         methodEditText = findViewById(R.id.recipeMethod);
         saveRecipeButton = findViewById(R.id.saveRecipe);
         cancelButton = findViewById(R.id.cancelRecipe);
+        fastFoodRecipesCardView = findViewById(R.id.fastFoodRecipes);
+        pakistaniRecipes = findViewById(R.id.pakistaniRecipe);
+        vegRecipes = findViewById(R.id.vegRecipes);
+        chickenRecipes = findViewById(R.id.chickenRecipes);
     }
+
 
 }

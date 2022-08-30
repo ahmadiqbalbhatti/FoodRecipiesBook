@@ -8,7 +8,9 @@
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/btn_bg.xml" value="0.1745" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/btn_bg_hollow.xml" value="0.1745" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/curser.xml" value="0.231" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/edit_pen.xml" value="0.191" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/favorite.xml" value="0.192" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/favorite_fill.xml" value="0.191" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/filter.xml" value="0.192" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/home.xml" value="0.1635" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/drawable/login_bg_card.xml" value="0.176" />
@@ -23,7 +25,7 @@
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
-        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_recipe_detail.xml" value="0.22521367521367522" />
+        <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_recipe_detail.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_recipes_list.xml" value="0.22521367521367522" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/activity_sign_up.xml" value="0.22521367521367522" />
         <entry key="..\:/AndroidProjects/FoodRecipiesBook/app/src/main/res/layout/add_new_recipe_layout_design.xml" value="0.22521367521367522" />

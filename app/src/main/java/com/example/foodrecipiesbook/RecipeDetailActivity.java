@@ -17,7 +17,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     Boolean isFavorite = true;
 
-    String detail = "android:text=Chicken, Eggs, Rice, White rice chicken biryani Biryani masala Chicken, Eggs, Rice, White rice chicken biryani Biryani \n\nmasala Chicken, Eggs, Rice, White rice chicken biryani Biryani masala Chicken, Eggs, Rice, White rice chicken biryani Biryani masala Chicken, Eggs, Rice, White rice chicken biryani Biryani masala";
+    String detail = "Eggs, Rice, White rice chicken biryani Biryani masala Chicken, Eggs, Rice, White rice chicken biryani Biryani \n\nmasala Chicken, Eggs, Rice, White rice chicken biryani Biryani masala Chicken, Eggs, Rice, White rice chicken biryani Biryani masala Chicken, Eggs, Rice, White rice chicken biryani Biryani masala";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -84,6 +84,10 @@ public class FirebaseClass {
         });
     }
 
+    public void signOutUser(){
+        mAuth.signOut();
+    }
+
 //    public void registerUser(String email, String password) {
 //        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
 //            @Override

@@ -39,7 +39,7 @@ public class RecommendedRecipeListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.food_card_layout_for_favorite, null);
+        convertView = layoutInflater.inflate(R.layout.food_card_layout_for_recommended_recipes, null);
 
         TextView recipeTitle = convertView.findViewById(R.id.cardRecipeTitle);
         ImageView cardImage = convertView.findViewById(R.id.cardBottomImage);

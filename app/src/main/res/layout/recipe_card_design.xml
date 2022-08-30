@@ -10,9 +10,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="150sp"
+        android:backgroundTint="@color/white"
+        android:focusable="false"
         app:cardCornerRadius="12sp"
         app:cardElevation="8sp"
-        android:focusable="false"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -24,16 +25,16 @@
                 android:id="@+id/recipeImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:scaleType="fitXY"
                 android:layout_gravity="center"
+                android:scaleType="fitXY"
                 android:src="@drawable/app_logo" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:layout_margin="8sp"
                 android:layout_marginStart="10sp"
-                android:layout_margin="8sp">
+                android:gravity="center_vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -41,53 +42,53 @@
                     android:orientation="vertical">
 
 
-                <TextView
-                    android:id="@+id/recipeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Recipe Name Name Name"
-                    android:textColor="@color/darkBrown_700"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/recipeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recipe Name Name Name"
+                        android:textColor="@color/darkBrown_700"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
 
                     <TextView
                         android:id="@+id/recipeIngredients"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ingrdents List will go here Ingrdents List will go here"
+                        android:text="@string/ingrdents_list_will_go_here_ingrdents_list_will_go_here"
                         android:textColor="@color/darkBrown_700"
                         android:textSize="12sp" />
 
                 </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentStart="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/time" />
+                        android:src="@drawable/time" />
 
 
-                        <TextView
-                            android:id="@+id/recipeCookingTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8sp"
-                            android:text="30 MINT"
-                            android:textColor="@color/darkBrown_700"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/recipeCookingTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8sp"
+                        android:text="@string/_30_mint"
+                        android:textColor="@color/darkBrown_700"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                    </LinearLayout>
+                </LinearLayout>
 
-                </RelativeLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 

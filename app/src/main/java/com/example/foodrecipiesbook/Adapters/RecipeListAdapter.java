@@ -8,36 +8,35 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.foodrecipiesbook.FireBase.DataModel;
 import com.example.foodrecipiesbook.R;
+
+import java.util.ArrayList;
 
 public class RecipeListAdapter extends BaseAdapter {
 
     private Context context;
-    private int[] listOfImages;
-    private String[] listOfTitle;
-    private String[] listOfIngredients;
-    private String[] listOfTime;
+    ArrayList<DataModel> dataModelArrayList;
+    private int viewId;
 
 
     private LayoutInflater layoutInflater;
 
-    public RecipeListAdapter(Context context, int[] listOfImages, String[] listOfTitle, String[] listOfIngredients, String[] listOfTime) {
+    public RecipeListAdapter(Context context, ArrayList<DataModel> dataModelArrayList, int viewId) {
         this.context = context;
-        this.listOfImages = listOfImages;
-        this.listOfTitle = listOfTitle;
-        this.listOfIngredients = listOfIngredients;
-        this.listOfTime = listOfTime;
+        this.dataModelArrayList = dataModelArrayList;
         layoutInflater = LayoutInflater.from(context);
+        this.viewId = viewId;
     }
 
     @Override
     public int getCount() {
-        return listOfTitle.length;
+        return dataModelArrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return dataModelArrayList.get(position);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class RecipeListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.recipe_card_design, null);
+        convertView = layoutInflater.inflate(viewId, null);
 
         ImageView recipeImage = convertView.findViewById(R.id.recipeImage);
         TextView recipeTitle = convertView.findViewById(R.id.recipeTitle);
@@ -55,10 +54,10 @@ public class RecipeListAdapter extends BaseAdapter {
         TextView recipeCookingTime = convertView.findViewById(R.id.recipeCookingTime);
 
 
-        recipeImage.setImageResource(listOfImages[position]);
-        recipeTitle.setText(listOfTitle[position]);
-        recipeIngredients.setText(listOfIngredients[position]);
-        recipeCookingTime.setText(listOfTime[position]);
+        recipeImage.setImageResource(dataModelArrayList.get(position).image);
+        recipeTitle.setText(dataModelArrayList.get(position).title);
+        recipeIngredients.setText(dataModelArrayList.get(position).ingredients);
+        recipeCookingTime.setText(dataModelArrayList.get(position).duration);
 
         return convertView;
     }

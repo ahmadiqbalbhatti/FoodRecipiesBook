@@ -27,6 +27,8 @@
     <string name="cancel">cancel</string>
     <string name="nav_open">open</string>
     <string name="nav_close">close</string>
+    <string name="ingrdents_list_will_go_here_ingrdents_list_will_go_here">Ingrdents List will go here Ingrdents List will go here</string>
+    <string name="_30_mint">30 MINT</string>
 
 
 </resources>
