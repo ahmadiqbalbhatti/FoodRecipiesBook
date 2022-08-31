@@ -59,12 +59,12 @@
 
 
             <ImageView
-                android:layout_width="100sp"
-                android:layout_height="100sp"
+                android:layout_width="120sp"
+                android:layout_height="120sp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:contentDescription="TODO"
-                android:src="@drawable/biryani" />
+                android:src="@drawable/burgers" />
 
         </RelativeLayout>
 

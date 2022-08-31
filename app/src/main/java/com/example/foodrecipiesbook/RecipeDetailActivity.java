@@ -29,8 +29,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Start Cooking");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        LinearLayout linearLayout = findViewById(R.id.favIcon);
-        ImageView favImage = findViewById(R.id.favoriteImage);
+//        LinearLayout linearLayout = findViewById(R.id.favIcon);
+//        ImageView favImage = findViewById(R.id.favoriteImage);
 
 
         ImageView headerImage = findViewById(R.id.headerImage);
@@ -45,25 +45,26 @@ public class RecipeDetailActivity extends AppCompatActivity {
             recipeTitle.setText(intent.getStringExtra("title"));
             recipeCookingTime.setText(intent.getStringExtra("time"));
             recipeIngredientsList.setText(intent.getStringExtra("ingredients"));
+
             headerImage.setImageResource(intent.getIntExtra("imageId", 700009));
-            recipeDetail.setText(detail);
+            recipeDetail.setText(intent.getStringExtra("method"));
         }
 
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!isFavorite){
-                    favImage.setImageResource(R.drawable.favorite);
-                    isFavorite=true;
-                }
-                else {
-                    favImage.setImageResource(R.drawable.solid_favorite);
-                    isFavorite=false;
-                }
-
-            }
-        });
+//        linearLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (!isFavorite){
+//                    favImage.setImageResource(R.drawable.favorite);
+//                    isFavorite=true;
+//                }
+//                else {
+//                    favImage.setImageResource(R.drawable.solid_favorite);
+//                    isFavorite=false;
+//                }
+//
+//            }
+//        });
 
     }
 }

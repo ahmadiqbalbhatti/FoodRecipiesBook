@@ -46,38 +46,23 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        logInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                if (email.isEmpty() && password.isEmpty()){
-                    Toast.makeText(LoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
-                }else{
-                    if (firebaseClass.loginUser(email, password)){
-                        navigateTo(LoginActivity.this, HomeActivity.class);
-                        finish();
-                    }
-
+        logInButton.setOnClickListener(v -> {
+            String email = emailEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            if (email.isEmpty() && password.isEmpty()){
+                Toast.makeText(LoginActivity.this, "Please Enter Email and Password", Toast.LENGTH_SHORT).show();
+            }else{
+                if (firebaseClass.loginUser(email, password)){
+                    navigateTo(LoginActivity.this, HomeActivity.class);
+                    finish();
                 }
-//                navigateTo(LoginActivity.this, HomeActivity.class);
 
             }
         });
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateTo(LoginActivity.this, SignUpActivity.class);
-            }
-        });
+        signUpButton.setOnClickListener(v -> navigateTo(LoginActivity.this, SignUpActivity.class));
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateTo(LoginActivity.this, ForgotPasswordActivity.class);
-            }
-        });
+        forgotPassword.setOnClickListener(v -> navigateTo(LoginActivity.this, ForgotPasswordActivity.class));
 
     }
 }

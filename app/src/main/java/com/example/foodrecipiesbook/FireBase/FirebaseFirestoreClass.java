@@ -7,11 +7,14 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class FirebaseFirestoreClass {
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore fireDataBase = FirebaseFirestore.getInstance();
 
     Context context;
 
@@ -19,8 +22,12 @@ public class FirebaseFirestoreClass {
         this.context = context;
     }
 
-    public void addNewUser(String collection, Object dataObject){
-        db.collection(collection).add(dataObject).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+    /**
+     * Add new user or recipe item in firebase
+     * FireStore database
+     * **/
+    public void addNewItem(String collection, Object dataObject){
+        fireDataBase.collection(collection).add(dataObject).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText(context, "Record Added", Toast.LENGTH_SHORT).show();
@@ -31,7 +38,22 @@ public class FirebaseFirestoreClass {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
+    /**
+     * Read a complete collection on database
+     * **/
+    public Task<QuerySnapshot> readItem(String collectionName){
+        return fireDataBase.collection(collectionName).get();
+    }
+
+    /**
+     * Read a complete document of given Document ID
+     * **/
+    public  Task<DocumentSnapshot> readItem(String collectionName,
+                                            String documentId){
+        return fireDataBase.collection(collectionName).document(documentId).get();
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.foodrecipiesbook;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -27,8 +29,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity{
 
     ArrayList<DataModel> dataModelArrayList;
 
@@ -59,12 +62,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         init();
 
         dialog = new Dialog(this);
         General generalFunctions = new General(this);
 
         dataModelArrayList = new ArrayList<>();
+
 //        DataModel dataModel = new DataModel();
 //        dataModel.image = R.drawable.biryani;
 //        dataModel.title = "Chicken burger with extra cheese";
@@ -73,8 +78,22 @@ public class HomeActivity extends AppCompatActivity {
 //
 //        dataModelArrayList.add(dataModel);
 
+//        HashMap<String,  Object> data = new HashMap<>();
+//        data.put("image",R.drawable.desert);
+//        data.put("title","My Lovey Sweet Dish");
+//        data.put("ingredients","Item1, Item2, Item3, Item4");
+//        data.put("duration", "12 MINT");
+//        data.put("method", "It is a long established fact that a reader will " +
+//                "be  distracted by the readable content of a page when " +
+//                "looking at its layout content here', making it" +
+//                " look like readable English.");
+//        FirebaseFirestoreClass firebaseFirestoreClass =
+//                new FirebaseFirestoreClass(HomeActivity.this);
+//        firebaseFirestoreClass.addNewItem("recipe", data);
+
         androidx.appcompat.widget.Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+
 //        Objects.requireNonNull(getSupportActionBar()).setTitle("Hi, Ahmad!");
 
 //        nav = (NavigationView) findViewById(R.id.navigationView);
@@ -85,6 +104,7 @@ public class HomeActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        toggle.syncState();
+
         fastFoodRecipesCardView.setOnClickListener(generalFunctions.
                 simpleClickListener(RecipesListActivity.class));
 
@@ -97,15 +117,16 @@ public class HomeActivity extends AppCompatActivity {
         chickenRecipes.setOnClickListener(generalFunctions.
                 simpleClickListener(RecipesListActivity.class));
 
-        addUserRecipesInRecyclerView();
 //        addRecommendedRecipesInView();
 
         addNewRecipeFAButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDialog();
+                addUserRecipesInRecyclerView();
             }
         });
+
 
     }
 
@@ -118,6 +139,7 @@ public class HomeActivity extends AppCompatActivity {
                 new LinearLayoutManager(HomeActivity.this,
                         LinearLayoutManager.VERTICAL, false);
         recyclerView = findViewById(R.id.newRecipeListView);
+
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(customRecyclerViewAdapter);
 
@@ -137,7 +159,6 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(HomeActivity.this,
                         LinearLayoutManager.HORIZONTAL, false);
-//        recyclerView = findViewById(R.id.recommendedRecipeListView);
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapterForRecommendedRecipes);
@@ -193,6 +214,7 @@ public class HomeActivity extends AppCompatActivity {
         vegRecipes = findViewById(R.id.vegRecipes);
         chickenRecipes = findViewById(R.id.chickenRecipes);
     }
+
 
 
 }
