@@ -55,5 +55,50 @@ public class FirebaseFirestoreClass {
         return fireDataBase.collection(collectionName).document(documentId).get();
     }
 
+    /**
+     * Use to filter result as per query
+     * **/
+    public Task<QuerySnapshot> filter(String collection, String field, String query){
+        return fireDataBase.collection(collection).whereEqualTo(field,query).get();
+    }
+
+    /**
+     * Use to Update data from FireStore database
+     * **/
+    public void Update (String collection, String documentId, Object data){
+        fireDataBase.collection(collection).document(documentId).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
+    /**
+     * Use to Delete data from FireStore database
+     * **/
+
+    public void Delete(String collection,String DocumentId) {
+        fireDataBase.collection(collection).document(DocumentId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(context, "Record Deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
 
 }

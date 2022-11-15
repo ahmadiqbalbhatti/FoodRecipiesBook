@@ -6,12 +6,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,20 +28,22 @@ import com.example.foodrecipiesbook.Adapters.AdapterForRecommendedRecipes;
 import com.example.foodrecipiesbook.Adapters.CustomRecyclerViewAdapter;
 import com.example.foodrecipiesbook.CustomClasses.General;
 import com.example.foodrecipiesbook.FireBase.DataModel;
+import com.example.foodrecipiesbook.FireBase.FirebaseFirestoreClass;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity{
 
     ArrayList<DataModel> dataModelArrayList;
 
-    private NavigationView nav;
-    private ActionBarDrawerToggle toggle;
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
     private Dialog dialog;
     private EditText titleEditText;
     private EditText durationEditText;
@@ -52,9 +57,15 @@ public class HomeActivity extends AppCompatActivity{
     private CardView pakistaniRecipes;
     private CardView vegRecipes;
     private CardView chickenRecipes;
+    
+    FirebaseFirestoreClass firebaseFirestoreClass;
+
+    ActionBarDrawerToggle toggle;
+
 
     public HomeActivity() {
     }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -69,41 +80,20 @@ public class HomeActivity extends AppCompatActivity{
         General generalFunctions = new General(this);
 
         dataModelArrayList = new ArrayList<>();
+        firebaseFirestoreClass =  new FirebaseFirestoreClass(HomeActivity.this);
 
-//        DataModel dataModel = new DataModel();
-//        dataModel.image = R.drawable.biryani;
-//        dataModel.title = "Chicken burger with extra cheese";
-//        dataModel.ingredients = "Item1, Item2, Item3, Item4, Item5";
-//        dataModel.duration = "50 MINT";
-//
-//        dataModelArrayList.add(dataModel);
 
-//        HashMap<String,  Object> data = new HashMap<>();
-//        data.put("image",R.drawable.desert);
-//        data.put("title","My Lovey Sweet Dish");
-//        data.put("ingredients","Item1, Item2, Item3, Item4");
-//        data.put("duration", "12 MINT");
-//        data.put("method", "It is a long established fact that a reader will " +
-//                "be  distracted by the readable content of a page when " +
-//                "looking at its layout content here', making it" +
-//                " look like readable English.");
-//        FirebaseFirestoreClass firebaseFirestoreClass =
-//                new FirebaseFirestoreClass(HomeActivity.this);
-//        firebaseFirestoreClass.addNewItem("recipe", data);
+        DrawerLayout dl = findViewById(R.id.drawerLayout);
+        NavigationView nav = findViewById(R.id.navigationView);
+        Toolbar t = findViewById(R.id.toolbar);
+        setSupportActionBar(t);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        androidx.appcompat.widget.Toolbar myToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
+        toggle = new ActionBarDrawerToggle(this,dl,R.string.open,R.string.close);
+        toggle.setDrawerIndicatorEnabled(true);
+        dl.addDrawerListener(toggle);
+        toggle.syncState();
 
-//        Objects.requireNonNull(getSupportActionBar()).setTitle("Hi, Ahmad!");
-
-//        nav = (NavigationView) findViewById(R.id.navigationView);
-//        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-//        toggle = new ActionBarDrawerToggle(HomeActivity.this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
-//        drawerLayout.addDrawerListener(toggle);
-//        nav.bringToFront();
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//        toggle.syncState();
 
         fastFoodRecipesCardView.setOnClickListener(generalFunctions.
                 simpleClickListener(RecipesListActivity.class));
@@ -117,6 +107,33 @@ public class HomeActivity extends AppCompatActivity{
         chickenRecipes.setOnClickListener(generalFunctions.
                 simpleClickListener(RecipesListActivity.class));
 
+            firebaseFirestoreClass.readItem("myRecipe").addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    for (DocumentSnapshot document :
+                            queryDocumentSnapshots) {
+                        DataModel dataModel = new DataModel();
+                        dataModel.title =
+                                Objects.requireNonNull(document.get("title")).toString();
+                        dataModel.duration = Objects.requireNonNull(document.get("duration")).toString() ;
+                        dataModel.method =
+                                Objects.requireNonNull(document.get("method")).toString();
+                        dataModel.ingredients = Objects.requireNonNull(document.get(
+                                "ingredients")).toString();
+                        dataModel.image =
+                                Integer.parseInt(Objects.requireNonNull(document.get("image")).toString());
+                    dataModelArrayList.add(dataModel);
+                    addUserRecipesInRecyclerView();
+                    }
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
 //        addRecommendedRecipesInView();
 
         addNewRecipeFAButton.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +143,7 @@ public class HomeActivity extends AppCompatActivity{
                 addUserRecipesInRecyclerView();
             }
         });
+        
 
 
     }
@@ -137,7 +155,7 @@ public class HomeActivity extends AppCompatActivity{
 
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(HomeActivity.this,
-                        LinearLayoutManager.VERTICAL, false);
+                        LinearLayoutManager.HORIZONTAL, false);
         recyclerView = findViewById(R.id.newRecipeListView);
 
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -147,8 +165,6 @@ public class HomeActivity extends AppCompatActivity{
         if (customRecyclerViewAdapter.getItemCount() != 0) {
             textView.setVisibility(textView.GONE);
         }
-
-
     }
 
     private void addRecommendedRecipesInView() {
@@ -195,8 +211,27 @@ public class HomeActivity extends AppCompatActivity{
             dataModel.ingredients =
                     ingredientsEditText.getText().toString();
 
-            dataModelArrayList.add(dataModel);
-            addUserRecipesInRecyclerView();
+            if (!TextUtils.isEmpty(titleEditText.getText().toString()) &&
+                    !TextUtils.isEmpty(durationEditText.getText().toString()) &&
+                    !TextUtils.isEmpty(methodEditText.getText().toString()) &&
+                    !TextUtils.isEmpty(ingredientsEditText.getText().toString())){
+                dataModelArrayList.add(dataModel);
+                addUserRecipesInRecyclerView();
+
+                FirebaseFirestoreClass fireStoreDatabase =
+                        new FirebaseFirestoreClass(HomeActivity.this    );
+
+                HashMap<String, Object> recipe = new HashMap<>();
+                recipe.put("image", R.drawable.your_recipe_default_pic);
+                recipe.put("title", titleEditText.getText().toString());
+                recipe.put("duration", durationEditText.getText().toString());
+                recipe.put("ingredients", ingredientsEditText.getText().toString());
+                recipe.put("method", methodEditText.getText().toString());
+                fireStoreDatabase.addNewItem("myRecipe", recipe);
+            }
+            else{
+                Toast.makeText(this, "Please! Fill Up every filed", Toast.LENGTH_SHORT).show();
+            }
             dialog.dismiss();
         };
     }
@@ -216,5 +251,12 @@ public class HomeActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(toggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

@@ -34,32 +34,19 @@ public class RecipesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes_list);
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         firebaseFirestoreClass =
                 new FirebaseFirestoreClass(getApplicationContext());
         dataModelArrayList = new ArrayList<>();
 
         listView = findViewById(R.id.recipeListView);
+        Toast.makeText(RecipesListActivity.this, "Hi there", Toast.LENGTH_SHORT).show();
 
-        firebaseFirestoreClass.readItem("recipe").addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (DocumentSnapshot documentSnapshot :
-                        queryDocumentSnapshots) {
-                    if (!queryDocumentSnapshots.isEmpty()){
-//                        progressBar.setVisibility(View.INVISIBLE);
-//                        linearLayout.setVisibility(linearLayout.INVISIBLE);
-                        dataModelArrayList.add(documentSnapshot.toObject(DataModel.class));
-                        listView.setAdapter(new RecipeListAdapter(getApplicationContext(),
-                                dataModelArrayList, R.layout.recipe_card_design));
-                    }
-
-                }
-            }
-        });
-
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        readRecipeCollection("recipe");
+        readRecipeCollection("myRecipe");
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,4 +68,33 @@ public class RecipesListActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void readRecipeCollection(String collection){
+        firebaseFirestoreClass.readItem(collection).addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        @Override
+        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+            for (DocumentSnapshot documentSnapshot :
+                    queryDocumentSnapshots) {
+                if (!queryDocumentSnapshots.isEmpty()){
+                    DataModel dataModel = new DataModel();
+                    dataModel.title =
+                            documentSnapshot.get("title").toString();
+                    dataModel.duration = documentSnapshot.get("duration").toString() ;
+                    dataModel.method =
+                            documentSnapshot.get("method").toString();
+                    dataModel.ingredients = documentSnapshot.get(
+                            "ingredients").toString();
+                    dataModel.image =
+                            Integer.parseInt(documentSnapshot.get("image").toString());
+
+                    dataModelArrayList.add(dataModel);
+//                        dataModelArrayList.add(documentSnapshot.toObject(DataModel.class));
+                    listView.setAdapter(new RecipeListAdapter(getApplicationContext(),
+                            dataModelArrayList, R.layout.recipe_card_design));
+                }
+
+            }
+        }
+    });}
+
 }

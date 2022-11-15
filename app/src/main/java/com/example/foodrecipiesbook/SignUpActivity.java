@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.foodrecipiesbook.FireBase.FirebaseClass;
 import com.example.foodrecipiesbook.FireBase.FirebaseFirestoreClass;
@@ -45,7 +46,6 @@ public class SignUpActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                 finish();
             }
         });
@@ -63,10 +63,15 @@ public class SignUpActivity extends AppCompatActivity {
                 user.put("password", password);
 
                 // Use to create user login id
-                firebaseFirestoreClass.addNewItem("users", user);
-                firebaseClass.signUpUser(email, password);
-
-
+                if (password.length()>6){
+                    firebaseFirestoreClass.addNewItem("users", user);
+                    firebaseClass.signUpUser(email, password);
+                }
+                else{
+                    Toast.makeText(SignUpActivity.this, "Password must be " +
+                                    "greater than 6 character",
+                            Toast.LENGTH_SHORT).show();
+                }
 
                 finish();
             }
